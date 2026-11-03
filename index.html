@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Metas Geise Bel</title>
+<meta name="theme-color" content="#2A3040">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#2A3040;
+  --bg-2:#242A38;
+  --card:rgba(255,255,255,.055);
+  --card-2:rgba(255,255,255,.085);
+  --stroke:rgba(255,255,255,.10);
+  --stroke-2:rgba(255,255,255,.16);
+  --txt:#FFFFFF;
+  --txt-2:rgba(255,255,255,.58);
+  --txt-3:rgba(255,255,255,.38);
+  --accent:#E4F84B;
+  --accent-dim:rgba(228,248,75,.14);
+  --warn:#FF9A8A;
+  --warn-dim:rgba(255,154,138,.14);
+  --r-lg:26px;
+  --r-md:20px;
+  --r-sm:14px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  font-weight:400;
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+/* gradient blobs, a nod to the wallpaper reference */
+body::before,body::after{
+  content:'';position:fixed;border-radius:50%;filter:blur(90px);opacity:.30;pointer-events:none;z-index:0;
+}
+body::before{width:520px;height:520px;top:-220px;right:-160px;
+  background:radial-gradient(circle at 30% 30%,#7B5CF0,#2F6BE8 55%,transparent 72%);}
+body::after{width:460px;height:460px;bottom:-200px;left:-170px;
+  background:radial-gradient(circle at 60% 40%,#E4F84B,#4FD6A0 55%,transparent 72%);opacity:.17;}
+
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:22px 16px 60px}
+
+/* ---------- header ---------- */
+.top{display:flex;align-items:center;gap:13px;margin-bottom:22px}
+.av{width:46px;height:46px;border-radius:50%;flex:0 0 46px;
+  background:linear-gradient(140deg,#E4F84B,#4FD6A0 60%,#2F6BE8);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:600;font-size:16px;color:#1C2130;letter-spacing:-.02em}
+.top h1{font-size:19px;font-weight:600;margin:0;line-height:1.25;letter-spacing:-.01em}
+.top p{margin:2px 0 0;font-size:12.5px;color:var(--txt-2);font-weight:300}
+.top-r{margin-left:auto;display:flex;gap:8px}
+.ic{width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--stroke);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.18s;flex:0 0 40px}
+.ic:hover{background:var(--card-2);border-color:var(--stroke-2)}
+.ic svg{width:17px;height:17px;stroke:var(--txt);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- chips ---------- */
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:18px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;padding:9px 17px;border-radius:999px;font-size:12.5px;font-weight:500;
+  background:var(--card);border:1px solid var(--stroke);color:var(--txt-2);cursor:pointer;transition:.18s;
+  font-family:inherit}
+.chip:hover{background:var(--card-2);color:var(--txt)}
+.chip.on{background:#fff;color:#202634;border-color:#fff;font-weight:600}
+
+/* ---------- grid ---------- */
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r-lg);
+  padding:20px;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);position:relative}
+.c12{grid-column:span 12}.c8{grid-column:span 8}.c6{grid-column:span 6}
+.c5{grid-column:span 5}.c4{grid-column:span 4}.c7{grid-column:span 7}.c3{grid-column:span 3}
+@media(max-width:860px){.c8,.c6,.c5,.c4,.c7,.c3{grid-column:span 12}}
+
+.ttl{font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--txt-3);margin:0 0 3px}
+.sub{font-size:12px;color:var(--txt-2);font-weight:300;margin:0 0 16px;line-height:1.45}
+
+/* ---------- hero ---------- */
+.hero{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.ring{position:relative;width:166px;height:166px;flex:0 0 166px}
+.ring svg{transform:rotate(-90deg);width:166px;height:166px}
+.ring .bgc{stroke:rgba(255,255,255,.08)}
+.ring .fgc{stroke:var(--accent);transition:stroke-dashoffset .5s cubic-bezier(.4,0,.2,1),stroke .3s}
+.ring-in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-in .pc{font-size:33px;font-weight:600;letter-spacing:-.03em;line-height:1}
+.ring-in .lb{font-size:10.5px;color:var(--txt-2);margin-top:4px;font-weight:400;letter-spacing:.04em}
+.hero-r{flex:1;min-width:230px}
+.big{font-size:46px;font-weight:300;letter-spacing:-.035em;line-height:1;margin:0}
+.big span{font-size:23px;font-weight:400;color:var(--txt-2);margin-right:3px}
+.hero-r .cap{font-size:12.5px;color:var(--txt-2);margin:9px 0 0;font-weight:300;line-height:1.5}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.pill{padding:7px 13px;border-radius:999px;font-size:11.5px;font-weight:500;
+  background:var(--accent-dim);color:var(--accent);border:1px solid rgba(228,248,75,.26)}
+.pill.bad{background:var(--warn-dim);color:var(--warn);border-color:rgba(255,154,138,.26)}
+.pill.neutral{background:var(--card-2);color:var(--txt-2);border-color:var(--stroke)}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:11px}
+.stat{background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:var(--r-md);padding:15px 14px}
+.stat .k{font-size:10.5px;color:var(--txt-2);font-weight:400;letter-spacing:.02em;line-height:1.3}
+.stat .v{font-size:25px;font-weight:500;letter-spacing:-.025em;margin-top:7px;line-height:1}
+.stat .v small{font-size:13px;font-weight:400;color:var(--txt-2);letter-spacing:0}
+.stat .d{font-size:10.5px;color:var(--txt-3);margin-top:5px;font-weight:300}
+
+/* ---------- sliders ---------- */
+.ctrl{margin-bottom:21px}
+.ctrl:last-child{margin-bottom:0}
+.ctrl-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:11px}
+.ctrl-h .nm{font-size:12.5px;font-weight:500;color:var(--txt)}
+.ctrl-h .hint{font-size:10.5px;color:var(--txt-3);font-weight:300;display:block;margin-top:2px}
+.ctrl-h .val{font-size:17px;font-weight:600;color:var(--accent);letter-spacing:-.02em;white-space:nowrap}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:999px;
+  background:rgba(255,255,255,.12);outline:none;margin:0;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:21px;height:21px;
+  border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid var(--bg);
+  box-shadow:0 0 0 1px rgba(228,248,75,.45),0 3px 10px rgba(0,0,0,.4)}
+input[type=range]::-moz-range-thumb{width:21px;height:21px;border-radius:50%;background:var(--accent);
+  cursor:pointer;border:3px solid var(--bg);box-shadow:0 0 0 1px rgba(228,248,75,.45)}
+.scale{display:flex;justify-content:space-between;font-size:9.5px;color:var(--txt-3);margin-top:7px;font-weight:300}
+
+/* ---------- levers ---------- */
+.lever{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.055)}
+.lever:last-child{border-bottom:none;padding-bottom:0}
+.lever:first-child{padding-top:0}
+.lv-ic{width:38px;height:38px;flex:0 0 38px;border-radius:12px;background:var(--card-2);
+  display:flex;align-items:center;justify-content:center;font-size:16px}
+.lv-b{flex:1;min-width:0}
+.lv-b .n{font-size:12.5px;font-weight:500;line-height:1.3}
+.lv-b .c{font-size:11px;color:var(--txt-2);margin-top:3px;font-weight:300}
+.lv-t{text-align:right;flex:0 0 auto}
+.lv-t .need{font-size:16px;font-weight:600;letter-spacing:-.02em;line-height:1}
+.lv-t .tag{font-size:9.5px;margin-top:4px;font-weight:500;letter-spacing:.03em;text-transform:uppercase}
+.ok{color:var(--accent)}.no{color:var(--warn)}
+
+/* ---------- bars ---------- */
+.bars{display:flex;align-items:flex-end;gap:12px;height:148px;padding-top:8px}
+.bar-c{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end}
+.bar{width:100%;max-width:52px;border-radius:9px 9px 4px 4px;background:rgba(255,255,255,.13);
+  transition:height .5s cubic-bezier(.4,0,.2,1);position:relative;min-height:3px}
+.bar.hl{background:linear-gradient(180deg,var(--accent),rgba(228,248,75,.45))}
+.bar.gh{background:repeating-linear-gradient(135deg,rgba(228,248,75,.22),rgba(228,248,75,.22) 4px,transparent 4px,transparent 8px);
+  border:1px dashed rgba(228,248,75,.45)}
+.bar-v{font-size:10.5px;font-weight:600;color:var(--txt-2);white-space:nowrap}
+.bar-l{font-size:10px;color:var(--txt-3);font-weight:300}
+
+/* ---------- misc ---------- */
+.inline-in{background:rgba(255,255,255,.055);border:1px solid var(--stroke);border-radius:var(--r-sm);
+  padding:12px 14px;color:var(--txt);font-family:inherit;font-size:15px;font-weight:500;width:100%;outline:none;
+  transition:.18s;-moz-appearance:textfield}
+.inline-in::-webkit-outer-spin-button,.inline-in::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.inline-in:focus{border-color:rgba(228,248,75,.5);background:rgba(255,255,255,.075)}
+.in-lb{font-size:11px;color:var(--txt-2);font-weight:400;margin-bottom:7px;display:block}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+@media(max-width:480px){.two{grid-template-columns:1fr}}
+
+.note{font-size:11px;color:var(--txt-3);font-weight:300;line-height:1.55;margin-top:14px;
+  padding-top:13px;border-top:1px solid rgba(255,255,255,.055)}
+
+.bonus{display:flex;align-items:center;gap:13px;padding:15px;border-radius:var(--r-md);
+  background:var(--accent-dim);border:1px solid rgba(228,248,75,.26);margin-top:14px}
+.bonus.off{background:var(--card-2);border-color:var(--stroke)}
+.bonus .bi{font-size:21px;line-height:1}
+.bonus .bt{font-size:12px;font-weight:500;line-height:1.4}
+.bonus .bv{margin-left:auto;font-size:19px;font-weight:600;color:var(--accent);letter-spacing:-.02em;white-space:nowrap}
+.bonus.off .bv{color:var(--txt-3)}
+
+.foot{text-align:center;font-size:10.5px;color:var(--txt-3);font-weight:300;margin-top:26px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="av">GB</div>
+    <div>
+      <h1>Dra. Geise Bel</h1>
+      <p id="hdr-sub">Metas de novembro (harmonização facial)</p>
+    </div>
+    <div class="top-r">
+      <div class="ic" id="btn-reset" title="Voltar aos valores padrão">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4M3 4v5h5"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="chips" id="chips"></div>
+
+  <div class="grid">
+
+    <!-- HERO -->
+    <div class="card c7">
+      <div class="hero">
+        <div class="ring">
+          <svg viewBox="0 0 166 166">
+            <circle class="bgc" cx="83" cy="83" r="71" fill="none" stroke-width="11"/>
+            <circle id="ring-fg" class="fgc" cx="83" cy="83" r="71" fill="none" stroke-width="11"
+                    stroke-linecap="round" stroke-dasharray="446.1" stroke-dashoffset="446.1"/>
+          </svg>
+          <div class="ring-in">
+            <div class="pc" id="pc-meta">0%</div>
+            <div class="lb">da meta</div>
+          </div>
+        </div>
+        <div class="hero-r">
+          <p class="ttl">Projeção de faturamento</p>
+          <p class="big"><span>R$</span><span id="fat-proj" style="font-size:46px;font-weight:300;color:#fff;margin:0">0</span></p>
+          <p class="cap" id="hero-cap">Ajuste os números abaixo para ver a projeção.</p>
+          <div class="pill-row" id="hero-pills"></div>
+        </div>
+      </div>
+      <div class="bonus" id="bonus">
+        <div class="bi">🎯</div>
+        <div class="bt">Bônus da equipe<br><span style="color:var(--txt-2);font-weight:300;font-size:11px">1% do faturamento bruto ao bater a meta</span></div>
+        <div class="bv" id="bonus-v">R$ 0</div>
+      </div>
+    </div>
+
+    <!-- OPERAÇÃO DIÁRIA -->
+    <div class="card c5">
+      <p class="ttl">Ritmo necessário</p>
+      <p class="sub">O que a engrenagem precisa entregar todo dia para a conta fechar.</p>
+      <div class="stats">
+        <div class="stat"><div class="k">Leads por dia</div><div class="v" id="s-lead-dia">0</div><div class="d" id="s-lead-mes">0 no mês</div></div>
+        <div class="stat"><div class="k">Agendamentos</div><div class="v" id="s-agen">0</div><div class="d" id="s-agen-cad">no mês</div></div>
+        <div class="stat"><div class="k">Procedimentos</div><div class="v" id="s-proc">0</div><div class="d" id="s-proc-sem">no mês</div></div>
+        <div class="stat"><div class="k">Investimento</div><div class="v" id="s-inv">R$ 0</div><div class="d" id="s-inv-dia">por mês</div></div>
+        <div class="stat"><div class="k">CAC</div><div class="v" id="s-cac">R$ 0</div><div class="d">custo por procedimento</div></div>
+        <div class="stat"><div class="k">ROAS</div><div class="v" id="s-roas">0x</div><div class="d">retorno sobre o investido</div></div>
+      </div>
+    </div>
+
+    <!-- CONTROLES -->
+    <div class="card c7">
+      <p class="ttl">Nossos números (arraste para simular)</p>
+      <p class="sub">Se o custo por lead for X, a projeção é Y. Mexa em um de cada vez para ver o peso de cada alavanca.</p>
+
+      <div class="ctrl">
+        <div class="ctrl-h">
+          <div><span class="nm">Investimento por dia</span><span class="hint">Verba só de captação de leads</span></div>
+          <span class="val" id="v-inv">R$ 200</span>
+        </div>
+        <input type="range" id="r-inv" min="0" max="600" step="10" value="200">
+        <div class="scale"><span>R$ 0</span><span>R$ 300</span><span>R$ 600</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl-h">
+          <div><span class="nm">Custo por lead</span><span class="hint">Julho R$ 21,61 · Agosto R$ 10,49 · Outubro R$ 25,16</span></div>
+          <span class="val" id="v-cpl">R$ 25,16</span>
+        </div>
+        <input type="range" id="r-cpl" min="5" max="45" step="0.25" value="25.16">
+        <div class="scale"><span>R$ 5</span><span>R$ 25</span><span>R$ 45</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl-h">
+          <div><span class="nm">Lead vira agendamento</span><span class="hint">Média histórica em torno de 5%</span></div>
+          <span class="val" id="v-ag">5,0%</span>
+        </div>
+        <input type="range" id="r-ag" min="1" max="15" step="0.1" value="5">
+        <div class="scale"><span>1%</span><span>8%</span><span>15%</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl-h">
+          <div><span class="nm">Consulta vira procedimento</span><span class="hint">Julho 76,9% · Agosto 80,0%</span></div>
+          <span class="val" id="v-fe">78,8%</span>
+        </div>
+        <input type="range" id="r-fe" min="40" max="100" step="0.5" value="78.8">
+        <div class="scale"><span>40%</span><span>70%</span><span>100%</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl-h">
+          <div><span class="nm">Ticket médio</span><span class="hint">Valor médio fechado por paciente</span></div>
+          <span class="val" id="v-tk">R$ 6.500</span>
+        </div>
+        <input type="range" id="r-tk" min="2000" max="15000" step="100" value="6500">
+        <div class="scale"><span>R$ 2 mil</span><span>R$ 8,5 mil</span><span>R$ 15 mil</span></div>
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl-h">
+          <div><span class="nm">Faturamento de outras origens</span><span class="hint">Orgânico, indicação e retorno (fora do tráfego pago)</span></div>
+          <span class="val" id="v-ou">R$ 0</span>
+        </div>
+        <input type="range" id="r-ou" min="0" max="80000" step="1000" value="0">
+        <div class="scale"><span>R$ 0</span><span>R$ 40 mil</span><span>R$ 80 mil</span></div>
+      </div>
+
+      <div class="two" style="margin-top:4px">
+        <div>
+          <label class="in-lb" for="i-meta">Meta do mês (R$)</label>
+          <input class="inline-in" type="number" id="i-meta" value="100000" step="5000" min="0">
+        </div>
+        <div>
+          <label class="in-lb" for="i-dias">Dias de campanha no mês</label>
+          <input class="inline-in" type="number" id="i-dias" value="30" step="1" min="1" max="31">
+        </div>
+      </div>
+    </div>
+
+    <!-- ENGRENAGEM DA META -->
+    <div class="card c5">
+      <p class="ttl">Engrenagem da meta</p>
+      <p class="sub" id="eng-sub">O que cada alavanca precisa marcar para fechar a meta, mantendo as outras como estão.</p>
+      <div id="levers"></div>
+      <div class="note" id="eng-note"></div>
+    </div>
+
+    <!-- ACOMPANHAMENTO -->
+    <div class="card c5">
+      <p class="ttl">Onde estamos agora</p>
+      <p class="sub">Preencha conforme o mês anda para ver o quanto falta.</p>
+      <div class="two">
+        <div>
+          <label class="in-lb" for="i-real">Já faturado no mês (R$)</label>
+          <input class="inline-in" type="number" id="i-real" value="0" step="500" min="0">
+        </div>
+        <div>
+          <label class="in-lb" for="i-rest">Dias que faltam</label>
+          <input class="inline-in" type="number" id="i-rest" value="27" step="1" min="0" max="31">
+        </div>
+      </div>
+      <div class="stats" style="margin-top:14px">
+        <div class="stat"><div class="k">Falta faturar</div><div class="v" id="s-falta">R$ 0</div><div class="d" id="s-falta-d">para a meta</div></div>
+        <div class="stat"><div class="k">Procedimentos restantes</div><div class="v" id="s-pfalta">0</div><div class="d" id="s-pfalta-d">no ticket atual</div></div>
+        <div class="stat"><div class="k">Por dia útil</div><div class="v" id="s-pdia">R$ 0</div><div class="d">ritmo necessário</div></div>
+      </div>
+    </div>
+
+    <!-- HISTÓRICO -->
+    <div class="card c7">
+      <p class="ttl">Faturamento mês a mês</p>
+      <p class="sub">Outubro fechou em R$ 51 mil. Novembro pontilhado é a projeção dos números acima.</p>
+      <div class="bars" id="bars"></div>
+      <div class="note">Julho e agosto bateram a casa dos 100 mil. Os valores exatos desses meses e de abril (o recorde) ainda precisam ser confirmados no controle da clínica, por isso não entram no gráfico.</div>
+    </div>
+
+  </div>
+
+  <p class="foot">Agência Crown · atualizado conforme os números que vocês ajustarem aqui<br>As projeções seguem as taxas de julho, agosto e outubro de 2026.</p>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var BRL = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+  var BRL2 = new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:2,maximumFractionDigits:2});
+  var NUM = new Intl.NumberFormat('pt-BR',{maximumFractionDigits:0});
+  var NUM1 = new Intl.NumberFormat('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
+
+  var KEY = 'metas-geisebel-v1';
+
+  var DEFAULTS = { inv:200, cpl:25.16, ag:5, fe:78.8, tk:6500, ou:0, meta:100000, dias:30, real:0, rest:27 };
+
+  var PRESETS = [
+    { id:'hoje',   nm:'Hoje',       v:{ cpl:25.16, ag:5,    fe:78.8 } },
+    { id:'julho',  nm:'Julho',      v:{ cpl:21.61, ag:6.5,  fe:76.9 } },
+    { id:'agosto', nm:'Agosto',     v:{ cpl:10.49, ag:4.9,  fe:80.0 } },
+    { id:'meta',   nm:'Meta Nov',   v:{ cpl:18.00, ag:6.5,  fe:80.0 } },
+    { id:'sonho',  nm:'Cenário bom',v:{ cpl:12.00, ag:7.0,  fe:82.0 } }
+  ];
+
+  var S = {};
+  var el = function(id){ return document.getElementById(id); };
+
+  function load(){
+    S = Object.assign({},DEFAULTS);
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(raw){ var o = JSON.parse(raw); for(var k in DEFAULTS){ if(typeof o[k]==='number' && isFinite(o[k])) S[k]=o[k]; } }
+    }catch(e){}
+  }
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
+
+  // ---------- chips ----------
+  function buildChips(){
+    var c = el('chips'); c.innerHTML='';
+    PRESETS.forEach(function(p){
+      var b = document.createElement('button');
+      b.className='chip'; b.textContent=p.nm; b.dataset.id=p.id;
+      b.addEventListener('click',function(){
+        S.cpl=p.v.cpl; S.ag=p.v.ag; S.fe=p.v.fe;
+        sync(); render(); save();
+      });
+      c.appendChild(b);
+    });
+  }
+  function markChip(){
+    document.querySelectorAll('.chip').forEach(function(b){
+      var p = PRESETS.filter(function(x){return x.id===b.dataset.id;})[0];
+      var on = p && Math.abs(p.v.cpl-S.cpl)<0.13 && Math.abs(p.v.ag-S.ag)<0.06 && Math.abs(p.v.fe-S.fe)<0.3;
+      b.classList.toggle('on',!!on);
+    });
+  }
+
+  // ---------- math ----------
+  function calc(){
+    var invMes = S.inv * S.dias;
+    var leads  = S.cpl > 0 ? invMes / S.cpl : 0;
+    var agen   = leads * (S.ag/100);
+    var proc   = agen * (S.fe/100);
+    var fatTrf = proc * S.tk;
+    var fatTot = fatTrf + S.ou;
+    var pc     = S.meta > 0 ? (fatTot / S.meta) * 100 : 0;
+    return {
+      invMes:invMes, leads:leads, leadDia:S.dias>0?leads/S.dias:0,
+      agen:agen, proc:proc, fatTrf:fatTrf, fatTot:fatTot, pc:pc,
+      cac: proc>0 ? invMes/proc : 0,
+      roas: invMes>0 ? fatTrf/invMes : 0,
+      cadencia: agen>0 ? S.dias/agen : 0,
+      procNec: S.tk>0 ? Math.max(0,(S.meta - S.ou))/S.tk : 0
+    };
+  }
+
+  // ---------- render ----------
+  function render(){
+    var d = calc();
+
+    // hero
+    el('fat-proj').textContent = NUM.format(Math.round(d.fatTot));
+    var pcShown = Math.max(0,Math.min(999,d.pc));
+    el('pc-meta').textContent = NUM.format(Math.round(pcShown)) + '%';
+    var C = 2*Math.PI*71;
+    el('ring-fg').setAttribute('stroke-dashoffset', C * (1 - Math.min(1,pcShown/100)));
+    el('ring-fg').style.stroke = d.pc >= 100 ? 'var(--accent)' : (d.pc >= 80 ? '#FFD166' : 'var(--warn)');
+
+    var gap = d.fatTot - S.meta;
+    el('hero-cap').textContent = gap >= 0
+      ? 'Passa a meta em ' + BRL.format(gap) + ' com ' + NUM.format(Math.round(d.invMes)) + ' reais investidos no mês.'
+      : 'Faltam ' + BRL.format(-gap) + ' para a meta de ' + BRL.format(S.meta) + '.';
+
+    var hp = el('hero-pills'); hp.innerHTML='';
+    function pill(txt,cls){ var s=document.createElement('span'); s.className='pill'+(cls?' '+cls:''); s.textContent=txt; hp.appendChild(s); }
+    pill(NUM1.format(d.roas)+'x de retorno', d.roas>=8?'':'bad');
+    pill(NUM.format(Math.round(d.proc))+' procedimentos','neutral');
+    pill('CAC '+BRL.format(d.cac), d.cac <= S.tk*0.25 ? '' : 'bad');
+
+    // bonus
+    var bon = el('bonus'), bv = el('bonus-v');
+    if(d.fatTot >= S.meta && S.meta > 0){
+      bon.classList.remove('off'); bv.textContent = BRL.format(d.fatTot*0.01);
+    } else {
+      bon.classList.add('off'); bv.textContent = 'R$ 0';
+    }
+
+    // ritmo
+    el('s-lead-dia').innerHTML = NUM1.format(d.leadDia);
+    el('s-lead-mes').textContent = NUM.format(Math.round(d.leads)) + ' no mês';
+    el('s-agen').textContent = NUM.format(Math.round(d.agen));
+    el('s-agen-cad').textContent = d.agen>0 ? ('1 a cada ' + NUM1.format(d.cadencia) + ' dias') : 'nenhum';
+    el('s-proc').textContent = NUM.format(Math.round(d.proc));
+    el('s-proc-sem').textContent = NUM1.format(d.proc/4.3) + ' por semana';
+    el('s-inv').innerHTML = '<small>R$ </small>' + NUM.format(Math.round(d.invMes));
+    el('s-inv-dia').textContent = BRL.format(S.inv) + ' por dia';
+    el('s-cac').innerHTML = '<small>R$ </small>' + NUM.format(Math.round(d.cac));
+    el('s-roas').innerHTML = NUM1.format(d.roas) + '<small>x</small>';
+
+    renderLevers(d);
+    renderTrack(d);
+    renderBars(d);
+    markChip();
+  }
+
+  function renderLevers(d){
+    var L = el('levers'); L.innerHTML='';
+    var pn = d.procNec;
+
+    // CPL needed, holding rates and budget
+    var leadsNec = (S.ag>0 && S.fe>0) ? pn / ((S.ag/100)*(S.fe/100)) : Infinity;
+    var cplNec   = leadsNec>0 && isFinite(leadsNec) ? d.invMes/leadsNec : 0;
+    // agendamento rate needed, holding CPL, fe, budget
+    var agNec    = (d.leads>0 && S.fe>0) ? (pn/(S.fe/100))/d.leads*100 : Infinity;
+    // fechamento rate needed
+    var feNec    = d.agen>0 ? pn/d.agen*100 : Infinity;
+    // daily budget needed
+    var invNec   = (S.ag>0 && S.fe>0 && S.dias>0) ? (leadsNec*S.cpl)/S.dias : Infinity;
+
+    var rows = [
+      { ic:'💸', n:'Custo por lead',            c:'Hoje em '+BRL2.format(S.cpl),
+        need: isFinite(cplNec)&&cplNec>0 ? BRL2.format(cplNec) : 'impossível',
+        ok: cplNec >= S.cpl, tag: cplNec>=S.cpl ? 'folga' : 'precisa cair' },
+      { ic:'📅', n:'Lead vira agendamento',     c:'Hoje em '+NUM1.format(S.ag)+'%',
+        need: isFinite(agNec)&&agNec<=100 ? NUM1.format(agNec)+'%' : 'acima de 100%',
+        ok: agNec <= S.ag, tag: agNec<=S.ag ? 'folga' : 'precisa subir' },
+      { ic:'🤝', n:'Consulta vira procedimento',c:'Hoje em '+NUM1.format(S.fe)+'%',
+        need: isFinite(feNec)&&feNec<=100 ? NUM1.format(feNec)+'%' : 'acima de 100%',
+        ok: feNec <= S.fe, tag: feNec<=S.fe ? 'folga' : 'precisa subir' },
+      { ic:'📈', n:'Investimento por dia',      c:'Hoje em '+BRL.format(S.inv),
+        need: isFinite(invNec) ? BRL.format(invNec) : 'impossível',
+        ok: invNec <= S.inv, tag: invNec<=S.inv ? 'folga' : 'precisa subir' }
+    ];
+
+    rows.forEach(function(r){
+      var w = document.createElement('div'); w.className='lever';
+      w.innerHTML = '<div class="lv-ic">'+r.ic+'</div>'+
+        '<div class="lv-b"><div class="n">'+r.n+'</div><div class="c">'+r.c+'</div></div>'+
+        '<div class="lv-t"><div class="need '+(r.ok?'ok':'no')+'">'+r.need+'</div>'+
+        '<div class="tag '+(r.ok?'ok':'no')+'">'+r.tag+'</div></div>';
+      L.appendChild(w);
+    });
+
+    el('eng-note').textContent = 'Para bater ' + BRL.format(S.meta) + ' são necessários ' +
+      NUM.format(Math.ceil(pn)) + ' procedimentos no ticket de ' + BRL.format(S.tk) + '. ' +
+      'Cada linha mostra o valor que aquela alavanca sozinha precisaria marcar, com as outras três paradas onde estão.';
+  }
+
+  function renderTrack(d){
+    var falta = Math.max(0, S.meta - S.real);
+    el('s-falta').innerHTML = '<small>R$ </small>' + NUM.format(Math.round(falta));
+    el('s-falta-d').textContent = S.real>0 ? (NUM.format(Math.round(S.real/S.meta*100))+'% da meta já feito') : 'para a meta';
+    el('s-pfalta').textContent = S.tk>0 ? NUM.format(Math.ceil(falta/S.tk)) : '0';
+    el('s-pfalta-d').textContent = 'no ticket de ' + BRL.format(S.tk);
+    el('s-pdia').innerHTML = '<small>R$ </small>' + NUM.format(S.rest>0 ? Math.round(falta/S.rest) : 0);
+  }
+
+  function renderBars(d){
+    var data = [
+      { l:'Jul', v:null, gh:false },
+      { l:'Ago', v:null, gh:false },
+      { l:'Set', v:null, gh:false },
+      { l:'Out', v:51000, gh:false },
+      { l:'Nov', v:d.fatTot, gh:true }
+    ];
+    var vals = data.map(function(x){return x.v||0;}).concat([S.meta]);
+    var max = Math.max.apply(null, vals) * 1.12 || 1;
+    var b = el('bars'); b.innerHTML='';
+    data.forEach(function(x){
+      var c = document.createElement('div'); c.className='bar-c';
+      var h = x.v===null ? 3 : Math.max(3,(x.v/max)*118);
+      var cls = x.gh ? 'bar gh' : (x.v!==null && x.v>=S.meta ? 'bar hl' : 'bar');
+      c.innerHTML = '<div class="bar-v">'+(x.v===null?'—':NUM.format(Math.round(x.v/1000))+'k')+'</div>'+
+        '<div class="'+cls+'" style="height:'+h+'px"></div>'+
+        '<div class="bar-l">'+x.l+'</div>';
+      b.appendChild(c);
+    });
+  }
+
+  // ---------- wiring ----------
+  var MAP = [
+    ['r-inv','inv','v-inv',function(v){return BRL.format(v);}],
+    ['r-cpl','cpl','v-cpl',function(v){return BRL2.format(v);}],
+    ['r-ag', 'ag', 'v-ag', function(v){return NUM1.format(v)+'%';}],
+    ['r-fe', 'fe', 'v-fe', function(v){return NUM1.format(v)+'%';}],
+    ['r-tk', 'tk', 'v-tk', function(v){return BRL.format(v);}],
+    ['r-ou', 'ou', 'v-ou', function(v){return BRL.format(v);}]
+  ];
+  var INPUTS = [['i-meta','meta'],['i-dias','dias'],['i-real','real'],['i-rest','rest']];
+
+  function sync(){
+    MAP.forEach(function(m){ el(m[0]).value = S[m[1]]; el(m[2]).textContent = m[3](S[m[1]]); });
+    INPUTS.forEach(function(i){ el(i[0]).value = S[i[1]]; });
+  }
+
+  function bind(){
+    MAP.forEach(function(m){
+      el(m[0]).addEventListener('input',function(){
+        S[m[1]] = parseFloat(this.value);
+        el(m[2]).textContent = m[3](S[m[1]]);
+        render(); save();
+      });
+    });
+    INPUTS.forEach(function(i){
+      el(i[0]).addEventListener('input',function(){
+        var v = parseFloat(this.value);
+        S[i[1]] = isFinite(v) && v>=0 ? v : 0;
+        render(); save();
+      });
+    });
+    el('btn-reset').addEventListener('click',function(){
+      S = Object.assign({},DEFAULTS); sync(); render(); save();
+    });
+  }
+
+  load(); buildChips(); bind(); sync(); render();
+})();
+</script>
+</body>
+</html>
