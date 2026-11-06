@@ -14,7 +14,8 @@ const TYPES = {
   '.png':  'image/png',
   '.jpg':  'image/jpeg',
   '.ico':  'image/x-icon',
-  '.woff2':'font/woff2'
+  '.woff2':'font/woff2',
+  '.webmanifest': 'application/manifest+json; charset=utf-8'
 };
 
 const server = http.createServer((req, res) => {
@@ -42,7 +43,14 @@ const server = http.createServer((req, res) => {
 
   fs.readFile(filePath, (err, data) => {
     if (err) {
-      // single-page fallback
+      // A missing asset must 404, never be answered with the HTML page:
+      // a service worker or icon served as HTML fails in confusing ways.
+      if (path.extname(filePath)) {
+        res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+        res.end('Not found');
+        return;
+      }
+      // single-page fallback, only for extension-less routes
       fs.readFile(path.join(ROOT, 'index.html'), (e2, html) => {
         if (e2) { res.writeHead(404).end('Not found'); return; }
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
